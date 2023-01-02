@@ -1,0 +1,199 @@
+[memory.h | string.h]
+void *memset(void *ptr, int value, size_t num);
+    첫 인자는 셋팅하고자 하는 메모리 시작주소
+    두번째 인자는 셋팅하고자 하는 값(0 또는 char만 사용할 것)
+    세번째 인자는 길이
+    => 보통 문자열(char 배열)에서 값을 변경하거나 숫자배열을 0으로 초기화 할 때 사용
+
+
+
+<stdio.h> 
+int fclose(FILE *stream)
+    stream과 연관된 파일을 닫는다. fclose()가 성공적으로 수행되면 0을 되돌리고 아니면 EOF를 되돌린다.(EOF의 값은 -1 임)
+
+int feof(FILE *stream)
+    stream과 연관된 file의 끝인지 아닌지를 결정한다. 파일의 끝을 만났을 경우 0이 아닌 값을 되돌리고 파일의 끝일 경우 0을 되돌린다. 
+
+int fgetc(FILE *stream)
+    stream으로부터 읽혀질 문자를 되돌린 후 파일의 위치표시기의 값을 하나 증가시킨다. 이때 읽혀진 문자는 unsigned char 로서 정수로 자동 변환된다. 
+
+int fgets(char *str, int num, FILE *stream)
+    stream으로부터 num-1개의 문자까지 읽어 이를 str에 의해 지정된 문자열에 저장한다. 문자는 지정된 숫자나 지정된 숫자가 파일의 크기를 초과하는 경우 파일의 끝까지 읽는다.
+    읽은 후 맨 마지막으로 null을 추가시킨다. 성공적으로 수행되면 str을 되돌리고 실패했을 경우 null을 되돌린다.
+
+
+FILE *fopen(const char *fname, const char *mode);
+    fname에 의해 지정된 파일을 열고 그와 관련된 stream을 되돌린다. 이때 열린 파일의 작동형태는 mode로 결정되는데 mode는 문자열로서 이용할 수 있는 mode의 종류는 다음의 표와 같다.
+
+fopen()함수가 성공적으로 수행되면 FILE 포인터 값이 되돌려지고 실패했을 경우에는 null 값이 되돌려진다.
+   “r"             읽을 목적으로 텍스트파일을 연다.
+   “w"           기록할 목적으로 텍스트파일을 연다.
+   “a"           텍스트파일에 덧붙이기 위해 연다.
+   “rb"           읽을 목적으로 이진파일을 연다.
+   “wb"          기록할 목적으로 이진파일을 만든다.
+   “ab"          이진파일에 덧붙이기 위해 연다.
+   “r+"          텍스트파일을 읽고 쓰기 위해 연다.
+   “w+"           텍스트파일을 읽고 쓸 목적으로 만든다.
+   “a+"           텍스트파일을 읽고 쓸 목적으로 연다.
+   “rb+" 또는 ”r+b"  이진파일을 읽고 쓰기 위해 연다.
+   “wb+" 또는 "r+b" 기록할 목적으로 이진파일을 만든다.
+   “ab+" 또는 "a+b"  이진파일에 덧붙이기 위해 연다.
+
+int fputc (int ch, FILE *stream);
+    지정된 stream의 현재의 파일 위치에 문자 ch를 기록한 후 파일위치표시기의 값을 1 증가시킨다. 에러가 발생하면 EOF가, 정상적으로 실행되면 ch의 값이 되돌려진다.
+
+int fputs(const char *str, FILE *stream );
+    지정된 stream의 현재의 파일 위치에 문자열 str을 기록한다. 하지만 문자열 str의 끝을 나타내는 null 은 삽입되지 않는다. 에러가 발생하면 EOF가, 정상적으로 실행되면 비음수의 값이 되돌려진다.
+
+int fseek(FILE *stream, long int offset, int origin);
+    stream에 연결된 파일 위치표시기의 값을 offset 과 origin의 값에 따라 설정한다. 이 함수는 임의접근 형태의 입출력을 지원하기 위해 사용된다. offset은 origin으로부터의 숫자를 의미한다.
+    origin의 값으로는 다음의 세 가지중의 하나가 된다.
+    SEEK_SET   파일의 맨 처음
+    SEEK_CUR   현재의 위치
+    SEEK_END   파일의 맨 끝
+    성공적으로 수행되면 0이 되돌려지고 실패했을 경우 0이 아닌 값이 되돌려진다. fseek()함수는 이진파일에서만 사용한다.
+
+int getc(FILE *stream);
+    지정된 입력 stream으로부터 다음 문자를 되돌리고 파일위치표시기의 값을 1 만큼 증가시킨다. 파일의 끝에 도달하거나 에러가 발생하면 EOF가 되돌려진다. 하지만 이진파일에서는 파일의 끝을 feof()를 이용하여 확인해야 한다.
+
+int getchar(void);
+    stdin에서 다음 문자를 unsigned char 로 읽어 정수로 변환한 후 되돌린다. 파일의 끝이나 에러가 발생하면 EOF를 되돌린다.
+
+char gets(char *str);
+    stdin으로부터 문자를 읽어 str 에 의해 지정된 문자열에 저장한다. 문자는 새로운 라인(\n)이나 EOF를 만날 때까지 읽혀진다. 성공적으로 실행되면 str 문자열을 되돌리고 실패하면 null을 되돌린다.
+
+int printf(const char *format, ...);
+    format에 의해 지정된 문자열에 정의된 대로 인수들을 stdout에 기록한다.
+    format에 의해 지정되는 문자열에는 두 가지 형태가 있는데 첫째는 화면에 출력될 정보(변수 또는 리터럴)를 나타내는 문자열과 둘째 이들 정보가 출력되는 형식을 정의하는 문자열이다.
+    두 번째에서 정보가 출력되는 형식을 지정하기 위해 % 기호와 출력의 형식을 지정하는 문자열을 함께 사용해야 한다.
+
+int putc (int ch, FILE *stream);
+     ch 의 가장 오른쪽 바이트에 포함된 문자를 stream에 의해 지정된 파일에 기록한다. 성공적으로 실행되면 문자를 되돌리고 실패하면 EOF를 되돌린다.
+
+int putchar(int ch);
+    ch 의 가장 오른쪽 바이트에 포함된 문자를 stdout 에 출력한다. 성공적으로 실행되면 문자를 되돌리고 실패하면 EOF를 되돌린다.
+
+int puts(const char *str);
+    str에 의해 지정된 문자열을 표준 출력장치에 기록한다. 성공적으로 실행되면 비음수의 값을 되돌리고 실패하면 EOF를 되돌린다.
+
+int scanf (const char *format, ...);
+    printf()함수가 stdout에 출력하는 기능을 갖고 있음에 반해 scanf()함수는 stdin에서 입력받는 기능을 정의한다. 즉 scanf()는 스트림 stdin에서 정보를 읽어 이를 지정된 인수가 가리키는 변수에 저장한다.
+    scanf()에서 사용할 수 있는 입력형식은 아래와 같다.
+
+<ctype.h>
+
+int isalnum(int ch)
+   인수 ch 가 알파벳이나 숫자인 경우 0이 아닌 값을 되돌린다.
+
+int isalpha(int ch);
+   인수 ch 가 알파벳인 경우 0이 아닌 값을 되돌리고 아니면 0을 되돌린다.
+
+int isblank (int ch);
+   인수 ch 가 빈칸이면서 동시에 단어를 띄우기 위해 사용된 경우 0이 아닌 값을 되돌린다.(C-99에 추가됨);
+
+int isdigit(int ch);
+   인수 ch 가 0에서 9사이의 숫자인 경우 0이 아닌 값을 되돌리고 그외의 경우 0을 되돌린다.
+
+int islower(int ch);
+   인수 ch가 알파벳의 소문자인 경우 0이 아닌 값을 되돌리고 아니면 0을 되돌린다.
+
+int isspace(int ch);
+   인수 ch가 빈칸(space)인 경우 0이 아닌 값을 되돌리고 아니면 0을 되돌린다.
+
+int isupper(int ch);
+   인수 ch가 알파벳의 대문자인 경우 0이 아닌 값을 되돌리고 아니면 0을 되돌린다.
+
+
+
+[string.h]
+char *strcat(char *str1, const char *str2);
+    문자열 str1에 문자열 str2를 덧붙인 후 null을 첨가한다.
+
+int strcmp(const char *str1, const char *str2);
+    str1 과 str2를 비교한 후 str1 이 str2 보다 작으면 음수의 값을,
+    str1 이 str2 보다 크면 양수의 값을, 같으면 0 값을 되돌린다.
+
+char strcpy(char *str1, const char *str2);
+    str2의 문자열을 str1의 문자열에 복사시킨다. str2 는 null이 첨가된 문자열에 대한 포인터가 되어야 한다.
+
+size_t strlen(const char *str);
+    문자열의 길이를 되돌린다.
+
+int tolower(int ch);
+    ch가 문자일 때 이에 해당하는 소문자를 되돌린다.
+
+int toupper(int ch);
+    ch가 문자일 때 이에 해당하는 대문자를 되돌린다.
+
+
+
+<math.h>
+double cos(double arg);
+    인수 arg의 코사인 값을 되돌린다. 인수 arg는 래디안이다.
+
+double exp(double arg);
+    자연대수의 밑수 e(2.718282) 에 대하여 arg 제곱을 값을 되돌린다.
+
+double fabs(double num);
+    인수 num에 대한 절대값을 되돌린다
+
+double fmod(double a, double b);
+    값 a를 값 b 로 나눈 후 나머지 값을 되돌린다.
+
+double log(double num);
+    num에 대한 자연대수를 되돌린다. num의 값이 음수나 0 이면 에러가 발생한다.
+
+double log10(double num);
+    num에 대한 상용로그 즉 밑수 10에 대한 로그 값을 되돌린다. num의 값이 음수나 0 이면 에러가 발생한다.
+
+double pow(double base, double exp);
+    base를 exp 제곱한 값을 되돌린다. pow(2,4) 는 2^4 즉 16을 되돌린다.
+
+double sin(double arg);
+    인수 arg의 사인의 값을 되돌린다. 인수 arg는 래디안으로 표시되어야 한다.
+
+double sqrt(double num);
+    num의 제곱근의 값을 되돌린다. num의 값이 음수인 경우 에러가 발생한다.
+
+double tan(double arg);
+    인수 arg의 탄젠트 값을 되돌린다. 인수 arg는 래디안으로 표시되어야 한다.
+
+
+
+<time.h>
+double difftime(time_t time2, time_t time1);
+    time1과 time2의 차이 즉, time2-time1의 계산값을 초단위로 되돌린다.
+
+time_t time (time_t *time);
+    시스템의 현재 시간을 되돌린다.
+
+<stdlib.h>
+int abs(int num);
+    num에 대한 절대값을 되돌린다.
+
+double atof(const char *str);
+    str에 의해 지정된 문자열을 실수(double) 값으로 변환한다.
+
+int atoi(const char *str);
+    str에 의해 지정된 문자열을 정수(int) 값으로 변환한다.
+
+long int atol(const char *str);
+    str에 의해 지정된 문자열을 long 정수(long int) 값으로 변환한다.
+
+void exit(int exit_code);
+    정상적으로 프로그램을 종료시킨다. 이때 열려진 파일은 모두 자동적으로 flush되며 닫힌다.
+
+long int labs (long int num);
+    long 정수(long int) num 에 대한 절대값을 되돌린다.
+
+int rand(void);
+    난수를 발생시킨다. 난수는 0에서 RAND_MAX 사이인데 RAND_MAX의 값으로는 최소 32,767이 할당된다.
+
+double strtod(const char *start, char **end);
+    start에 의해 지정된 문자열에 저장된 숫자의 문자열표현을 double로 바꾼 후 그 결과 값을 되돌린다.
+
+long int strtol(const char *start, char **end, int radix);
+    start에 의해 지정된 문자열에 저장된 숫자의 문자열표현을 long int로 바꾼 후 그 결과 값을 되돌린다.
+
+int system(const char *str);
+    str에 의해 지정된 문자열(시스템 명령어)를 운영체제의 명령어 처리기로 보낸다.
