@@ -74,3 +74,85 @@ Node* insert(Node* node, int key) {
 		}
 	}
 }
+
+Node* deleteNode(Node* node, int key) {
+	Node* parent = NULL;
+	Node* del = node;
+	while (del) {
+		if (del->val == key) {
+			break;
+		}
+
+		parent = del;
+		if (del->val > key) {
+			del = del->left;
+		}
+		else {
+			del = del->right;
+		}
+	}
+
+	if (!del) {
+		printf("no node\n");
+		return NULL;
+	}
+
+	// 단말노드일경우 단순 삭제
+	if (!(del->right) && !(del->left)) {
+		if (parent) {
+			if (parent->left == del) {
+				parent->left = NULL;
+			} else {
+				parent->right = NULL;
+			}
+		} else {
+			node = NULL;
+		}
+	}
+
+	// 자식노드가 하나일경우
+	if (!(del->right) || !(del->left)) {
+		Node* child = del->left;
+		if (!del->left) {
+			child = del->right;
+		}
+
+		if (parent) {
+			if (parent->left == del) {
+				parent->left = child;
+			} else {
+				parent->right = child;
+			}
+		} else {
+			node = child;
+		}
+	}
+
+	// 자식노드가 2개일 경우
+	if (del->left && del->right) {
+		Node* leftParent = del;
+		Node* leftChild = del->left;
+
+		while (leftChild->right) {
+			leftParent = leftChild;
+			leftChild = leftChild->right;
+		}
+
+		leftParent->right = leftChild->left;
+		leftChild->left = node->left;
+		leftChild->right = node->right;
+
+		if (parent) {
+			if (parent->left == del) {
+				parent->left = leftChild;
+			} else {
+				parent->right = leftChild;
+			}
+		} else {
+			node = leftChild;
+		}
+	}
+
+	free(del);
+	return node;
+}
