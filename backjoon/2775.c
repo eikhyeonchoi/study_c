@@ -1,4 +1,7 @@
 #include <stdio.h>
+
+// 2775 부녀회장이 될테야
+
 int getn(int, int);
 int main() {
 	int t, k, n;

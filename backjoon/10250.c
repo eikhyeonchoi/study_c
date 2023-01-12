@@ -1,4 +1,7 @@
 #include <stdio.h>
+
+// 10250 ACM호텔
+
 int main() {
 	int T, H, W, N;
 	scanf("%d", &T);
