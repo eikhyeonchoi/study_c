@@ -49,3 +49,8 @@ void reverse(char a[]) {
 		a[size - 1 - i] = temp;
 	}
 }
+
+// 문자열 reverse 학습 
+// ASCII코드 학습 
+// char to int -> char - '0';
+// int to char -> int + '0';

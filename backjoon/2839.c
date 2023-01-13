@@ -5,7 +5,7 @@
 int main() {
 	int N = 0;
 	int answer = 0;
-	scanf_s("%d", &N);
+	scanf("%d", &N);
 
 	while (N >= 0) {
 		if (N % 5 == 0) {
@@ -21,3 +21,5 @@ int main() {
 	printf("-1");
 	return 0;
 }
+
+// 

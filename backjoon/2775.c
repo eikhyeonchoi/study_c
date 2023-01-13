@@ -19,3 +19,5 @@ int getn(int k, int n) {
 	if (n == 1) return 1;
 	return getn(k - 1, n) + getn(k, n - 1);
 }
+
+// 재귀함수는 어느정도 폼이 정해져있는 듯
