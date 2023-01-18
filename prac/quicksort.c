@@ -11,7 +11,6 @@ int main() {
 	scanf("%d", &len);
 
 	int* arr = (int*)malloc(sizeof(int) * 4);
-
 	for (int i = 0; i < len; i++) {
 		printf("%d번째 수 : ", i + 1);
 		scanf("%d", (arr + i));
